@@ -176,10 +176,13 @@ int main( int argc, char* args[] )
 			SDL_Event event;
 
             SDL_Rect DestR;
+
             DestR.x = SCREEN_WIDTH / 2; //640 / 2 - SHAPE_SIZE / 2;
             DestR.y = SCREEN_HEIGHT / 3; //580 / 2 - SHAPE_SIZE / 2;
             DestR.w = SCREEN_WIDTH / 4; //SHAPE_SIZE;
             DestR.h = SCREEN_HEIGHT / 2; //SHAPE_SIZE;
+            int bottom = SCREEN_HEIGHT - 10;
+            printf("Bottom is: %d", bottom);
 			//While application is running
 			while( !quit )
 			{
@@ -206,7 +209,7 @@ int main( int argc, char* args[] )
                             DestR.x = DestR.x + 5;
                         }
                         if (event.key.keysym.sym == SDLK_SPACE) {
-                            DestR.y = DestR.y - 25;
+                            DestR.y = DestR.y - 75;
                         }
                     }
                     if (event.type == SDL_MOUSEBUTTONDOWN) {
@@ -217,6 +220,11 @@ int main( int argc, char* args[] )
                     }
 				}
 
+                printf("DestR.y is: %d\n", DestR.y);
+                if ((DestR.y + 250) < bottom) {
+                    DestR.y = DestR.y + 1;
+                    printf("DestR.y after gravity is: %d\n", DestR.y);
+                }
 				//Clear screen
 				SDL_RenderClear( gRenderer );
 
